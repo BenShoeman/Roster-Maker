@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Smash Bros. Roster Maker</title>
+    <link rel="stylesheet" href="main.css" />
+    <script type="text/javascript" src="js/vibrant.js"></script>
+    <script type="text/javascript" src="main.js" defer></script>
+  </head>
+  <body>
+    <input id="fileinput" type="file" onchange="add_img_handler(this)" style="display:none" />
+    <div id="main_div">
+      <table id="roster_tbl" cellspacing="0" cellpadding="0" onclick="stop_context(event)" oncontextmenu="return false">
+        <tr>
+          <td><div onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" ondblclick="add_img(this)"></div><span onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" onclick="document.execCommand('selectAll',false,null)" spellcheck="false" contenteditable>click me</span></td>
+          <td><div onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" ondblclick="add_img(this)"></div><span onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" onclick="document.execCommand('selectAll',false,null)" spellcheck="false" contenteditable>click me</span></td>
+          <td><div onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" ondblclick="add_img(this)"></div><span onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" onclick="document.execCommand('selectAll',false,null)" spellcheck="false" contenteditable>click me</span></td>
+          <td><div onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" ondblclick="add_img(this)"></div><span onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" onclick="document.execCommand('selectAll',false,null)" spellcheck="false" contenteditable>click me</span></td>
+          <td><div onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" ondblclick="add_img(this)"></div><span onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" onclick="document.execCommand('selectAll',false,null)" spellcheck="false" contenteditable>click me</span></td>
+          <td><div onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" ondblclick="add_img(this)"></div><span onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" onclick="document.execCommand('selectAll',false,null)" spellcheck="false" contenteditable>click me</span></td>
+        </tr>
+        <tr>
+          <td><div onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" ondblclick="add_img(this)"></div><span onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" onclick="document.execCommand('selectAll',false,null)" spellcheck="false" contenteditable>click me</span></td>
+          <td><div onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" ondblclick="add_img(this)"></div><span onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" onclick="document.execCommand('selectAll',false,null)" spellcheck="false" contenteditable>click me</span></td>
+          <td><div onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" ondblclick="add_img(this)"></div><span onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" onclick="document.execCommand('selectAll',false,null)" spellcheck="false" contenteditable>click me</span></td>
+          <td><div onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" ondblclick="add_img(this)"></div><span onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" onclick="document.execCommand('selectAll',false,null)" spellcheck="false" contenteditable>click me</span></td>
+          <td><div onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" ondblclick="add_img(this)"></div><span onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" onclick="document.execCommand('selectAll',false,null)" spellcheck="false" contenteditable>click me</span></td>
+          <td><div onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" ondblclick="add_img(this)"></div><span onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" onclick="document.execCommand('selectAll',false,null)" spellcheck="false" contenteditable>click me</span></td>
+        </tr>
+      </table>
+    </div>
+    <div id="settings_div">
+      <label>Rows</label>
+      <input type="number" id="num_rows" value="2" min="1" max="25" oninput="change_dims(true)" onkeypress="event.preventDefault()" autocomplete="off" />&nbsp;&nbsp;
+      <label>Cols</label>
+      <input type="number" id="num_cols" value="6" min="1" max="25" oninput="change_dims(false)" onkeypress="event.preventDefault()" autocomplete="off" /><br/><br/>
+
+      <label style="display:block;margin:0 0 12px 0">Style</label>
+      <label class="container" onclick="change_theme('64')">64
+        <input type="radio" name="style" autocomplete="off" checked />
+        <span class="radiomark"></span>
+      </label>
+      <label class="container" onclick="change_theme('melee')">Melee
+        <input type="radio" name="style" autocomplete="off" />
+        <span class="radiomark"></span>
+      </label>
+      <label class="container" onclick="change_theme('brawl')">Brawl
+        <input type="radio" name="style" autocomplete="off" />
+        <span class="radiomark"></span>
+      </label>
+      <label class="container" onclick="change_theme('3ds')">3DS
+        <input type="radio" name="style" autocomplete="off" />
+        <span class="radiomark"></span>
+      </label>
+      <label class="container" onclick="change_theme('wiiu')">Wii U
+        <input type="radio" name="style" autocomplete="off" />
+        <span class="radiomark"></span>
+      </label>
+      <label class="container" onclick="change_theme('sm4sh')">Sm4sh Site
+        <input type="radio" name="style" autocomplete="off" />
+        <span class="radiomark"></span>
+      </label>
+      <label class="container" onclick="change_theme('ult')">Ultimate
+        <input type="radio" name="style" autocomplete="off" />
+        <span class="radiomark"></span>
+      </label>
+      <label class="container" onclick="change_theme('custom')">Custom
+        <input type="radio" name="style" autocomplete="off" />
+        <span class="radiomark"></span>
+      </label><br/>
+
+      <label style="display:block;margin:0 0 12px 0">Name Text</label>
+      <label class="container" onclick="change_box_visibility(true)">On
+        <input type="radio" name="boxes" autocomplete="off" checked />
+        <span class="radiomark"></span>
+      </label>
+      <label class="container" onclick="change_box_visibility(false)">Off
+        <input type="radio" name="boxes" autocomplete="off" />
+        <span class="radiomark"></span>
+      </label><br/>
+
+      <section id="paletteoptions" style="display:none">
+        <label style="display:block;margin:0 0 12px 0">Choose BG Palette</label>
+        <label class="container" onclick="change_palette_selection(true)">On
+          <input type="radio" name="palette" autocomplete="off" />
+          <span class="radiomark"></span>
+        </label>
+        <label class="container" onclick="change_palette_selection(false)">Off
+          <input type="radio" name="palette" autocomplete="off" checked />
+          <span class="radiomark"></span>
+        </label><br/>
+      </section>
+
+      <section id="customoptions" style="display:none">
+        <label style="display:block;margin:0 0 12px 0;text-align:center;text-decoration:underline;text-decoration-style:dotted;cursor:help" title='You can change these attributes using CSS styling. For images, you will need to use an absolute path wrapped in url(file:///...). For character-dependent palettes in Cell BG, type either &lt;auto&gt; for automatic selection or &lt;choose&gt; to choose in place of a color.'>Custom Options</label>
+        <label>Main BG</label>
+        <input type="text" onchange="change_theme('custom')" /><br/>
+        <label>Table BG</label>
+        <input type="text" onchange="change_theme('custom')" /><br/>
+        <label>Table Border</label>
+        <input type="text" onchange="change_theme('custom')" /><br/>
+        <label>Cellspacing</label>
+        <input type="number" min="0" onchange="change_theme('custom')" /><br/>
+        <label>Cell BG</label>
+        <input type="text" onchange="change_theme('custom')" /><br/>
+        <label>Cell Border</label>
+        <input type="text" onchange="change_theme('custom')" /><br/>
+        <label>Cell Radius</label>
+        <input type="text" onchange="change_theme('custom')" /><br/>
+        <label>Name Font</label>
+        <input type="text" onchange="change_theme('custom')" /><br/>
+        <label>Name Color</label>
+        <input type="text" onchange="change_theme('custom')" /><br/>
+        <label>Name Align</label>
+        <input type="text" onchange="change_theme('custom')" /><br/>
+        <label style="letter-spacing:-1px">Name Shadow</label>
+        <input type="text" onchange="change_theme('custom')" /><br/>
+        <label>Name BG</label>
+        <input type="text" onchange="change_theme('custom')" /><br/>
+        <label>Name Radius</label>
+        <input type="text" onchange="change_theme('custom')" /><br/>
+        <label>Name at Top?</label>
+        <label class="container" style="width:6em"><input type="checkbox" onchange="change_theme('custom')" /><span class="checkmark"></span></label><br/><br/>
+        <label>Namebox Ht.</label>
+        <input type="text" onchange="change_theme('custom')" /><br/>
+        <label>Name Size</label>
+        <input type="text" onchange="change_theme('custom')" /><br/>
+        <label>Image Radius</label>
+        <input type="text" onchange="change_theme('custom')" /><br/><br/>
+      </section>
+
+      <p style="text-decoration:underline;text-decoration-style:dotted;cursor:help" title='You can zoom the pictures by right clicking and dragging left/right.&#13;You can condense/expand text by right clicking and dragging left/right.'>Usage Tips</p>
+    </div>
+    <div id="popup">
+      <div id="dialog"></div>
+    </div>
+  </body>
+</html>

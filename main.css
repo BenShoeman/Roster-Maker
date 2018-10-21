@@ -1,0 +1,379 @@
+@font-face
+{
+  font-family: 'Arimo';
+  src: url('font/arimoreg.woff2') format('woff2'),
+        url('font/arimoreg.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face
+{
+  font-family: 'Arimo Bold';
+  src: url('font/arimobold.woff2') format('woff2'),
+        url('font/arimobold.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face
+{
+  font-family: 'Jost';
+  src: url('font/jost.woff2') format('woff2'),
+        url('font/jost.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face
+{
+  font-family: 'Melee CSS';
+  src: url('font/meleecss.woff2') format('woff2'),
+        url('font/meleecss.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face
+{
+  font-family: 'Old Sans Black';
+  src: url('font/oldsansblack.woff2') format('woff2'),
+        url('font/oldsansblack.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face
+{
+  font-family: 'Open Sans Condensed';
+  src: url('font/opensanscond.woff2') format('woff2'),
+        url('font/opensanscond.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body
+{
+  font-family: 'Old Sans Black', Arial, Helvetica, sans-serif;
+}
+
+#main_div
+{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: calc(100% - 8cm);
+  height: 100vh;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+
+  background-color: black;
+}
+
+#settings_div
+{
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 8cm;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 0.5cm;
+  box-sizing: border-box;
+  text-align: center;
+
+  background-color: #202020;
+  color: white;
+  box-shadow: 0 0 0.75cm rgba(0,0,0,0.5);
+  text-shadow: 1px -1px 0 black, 0 -1px 0 black, -1px -1px 0 black, -1px 0 0 black, -1px 1px 0 black, 0 1px 0 black, 1px 1px 0 black, 1px 0 0 black, 2px 2px 0 black;
+}
+
+#roster_tbl
+{
+  position: relative;
+  border: 1px white solid;
+  margin: 0 auto;
+  background-color: white;
+}
+
+#roster_tbl td
+{
+  position: relative;
+  border: 0.5px white solid;
+  width: 2.5cm;
+  min-width: 2.5cm;
+  height: 2cm;
+  vertical-align: top;
+  background-image: none;
+  color: white;
+}
+
+#roster_tbl td > div
+{
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0; left: 0;
+  cursor: pointer;
+  background: url(img/placeholder.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+#roster_tbl td > span
+{
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 0.6cm;
+  padding: 0 0.05cm 0 0.05cm;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: 0.45cm;
+  background-color: black;
+  color: inherit;
+  text-shadow: 0 0 6px black;
+  top: 0; left: 0;
+  text-transform: uppercase;
+}
+
+label
+{
+  margin-right: 0.5em;
+  margin-bottom: 8px;
+}
+
+input
+{
+  background: none;
+  border: 0;
+  border-bottom: 2px rgba(255,255,255,0.4) solid;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0.25em;
+  transition: 0.25s;
+  text-shadow: 1px -1px 0 black, 0 -1px 0 black, -1px -1px 0 black, -1px 0 0 black, -1px 1px 0 black, 0 1px 0 black, 1px 1px 0 black, 1px 0 0 black, 2px 2px 0 black;
+}
+
+input:focus
+{
+  outline: none;
+  border-bottom-color: #ff3;
+  transition: 0.25s;
+}
+
+input[type=number]
+{
+  width: 3em;
+  text-align: center;
+}
+
+#customoptions
+{
+  width: 100%;
+  text-align: right;
+}
+
+code, #customoptions input[type=text]
+{
+  font-family: Consolas, Monaco, Menlo, "Liberation Mono", monospace;
+  font-weight: bold;
+}
+
+#customoptions input
+{
+  width: 8em;
+}
+
+/* Checkbox/radio button container */
+.container
+{
+  width: 50%;
+  margin: 0 auto;
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox/radio button */
+.container input
+{
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.radiomark
+{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.25s;
+  box-shadow: 1px -1px 0 black, 0 -1px 0 black, -1px -1px 0 black, -1px 0 0 black, -1px 1px 0 black, 0 1px 0 black, 1px 1px 0 black, 1px 0 0 black, 2px 2px 0 black;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .radiomark
+{
+  background-color: #ddd;
+  transition: 0.25s;
+}
+
+/* When the radio button is checked, add a red background */
+.container input:checked ~ .radiomark
+{
+  background-color: #ffbf00;
+  transition: 0.25s;
+}
+
+/* Create the indicator */
+.radiomark:after
+{
+  content: "";
+  position: absolute;
+  display: none;
+  transition: 0.25s;
+}
+
+/* Show the indicator when checked */
+.container input:checked ~ .radiomark:after
+{
+  display: block;
+  transition: 0.25s;
+}
+
+/* Style the indicator */
+.container .radiomark:after
+{
+  top: 6px;
+  left: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: black;
+  transition: 0.25s;
+}
+
+/* Create a custom checkbox */
+.checkmark
+{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: white;
+  transition: 0.25s;
+  box-shadow: 1px -1px 0 black, 0 -1px 0 black, -1px -1px 0 black, -1px 0 0 black, -1px 1px 0 black, 0 1px 0 black, 1px 1px 0 black, 1px 0 0 black, 2px 2px 0 black;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark
+{
+  background-color: #ddd;
+  transition: 0.25s;
+}
+
+/* When the checkbox is checked, add a red background */
+.container input:checked ~ .checkmark
+{
+  background-color: #ffbf00;
+}
+
+/* Create the checkmark */
+.checkmark:after
+{
+  content: "";
+  position: absolute;
+  display: none;
+  transition: 0.25s;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after
+{
+  display: block;
+  transition: 0.25s;
+}
+
+/* Style the checkmark */
+.container .checkmark:after
+{
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px; 
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
+#customoptions .container, #customoptions .container *
+{
+  display: inline-block;
+}
+
+#customoptions .container input
+{
+  display: none;
+}
+
+#popup
+{
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  visibility: hidden;
+}
+
+#dialog
+{
+  position: relative;
+  margin: 0 auto;
+  width: 14cm;
+  height: 7cm;
+  background-color: white;
+  box-shadow: 0 0 2cm black;
+  text-align: center;
+}
+
+#dialog > label
+{
+  display: block;
+  padding: 0.5cm;
+  margin: 0;
+}
+
+#dialog table
+{
+  width: 100%;
+  height: calc(100% - 1.5cm);
+  margin: 0;
+  padding: 0 0.5cm 0.5cm 0.5cm;
+  border: 0;
+  box-sizing: border-box;
+}
+
+#dialog td
+{
+  margin: 0.5cm;
+  border: 0;
+  cursor: pointer;
+  box-sizing: border-box;
+}
