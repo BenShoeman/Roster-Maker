@@ -2,6 +2,7 @@ var curr_style = '64'
 var boxes_visible = true
 var choose_palette = false
 var sidebar_hidden = false
+var zoom_mode = false
 
 var is_screen_small = window.matchMedia ? 
   window.matchMedia("screen and (max-width: 1000px)").matches : 
@@ -18,27 +19,45 @@ function init()
     for (var j = 0; j < tds.length; j++)
     {
       var td = tds[j]
-      var div = document.createElement("div")
-      div.setAttribute("ondblclick", "add_img(this)")
-      div.setAttribute("onmousedown", "start_drag(event,this)")
-      div.setAttribute("onmousemove", "continue_drag(event,this)")
-      div.setAttribute("onmouseup", "end_drag(event,this)")
-      td.appendChild(div)
-      var sp = document.createElement("span")
-      sp.setAttribute("onclick", "document.execCommand('selectAll',false,null)")
-      sp.setAttribute("spellcheck", "false")
-      sp.setAttribute("contenteditable", "true")
-      sp.setAttribute("onmousedown", "start_drag(event,this)")
-      sp.setAttribute("onmousemove", "continue_drag(event,this)")
-      sp.setAttribute("onmouseup", "end_drag(event,this)")
-      sp.innerHTML = "click me"
-      td.appendChild(sp)
+      init_cell(td)
     }
   }
+
   if (is_screen_small)
   {
     toggle_nav()
   }
+
+  // Detect if device is touch-enabled and if so, show zoom mode options
+  if ('ontouchstart' in window || navigator.msMaxTouchPoints > 0)
+  {
+    document.getElementById("zoomoptions").style.display = "block"
+  }
+}
+
+function init_cell(td)
+{
+  var div = document.createElement("div")
+  div.setAttribute("ondblclick", "add_img(this)")
+  div.setAttribute("onmousedown", "start_drag(event,this)")
+  div.setAttribute("ontouchstart", "start_drag(event,this)")
+  div.setAttribute("onmousemove", "continue_drag(event,this)")
+  div.setAttribute("ontouchmove", "continue_drag(event,this)")
+  div.setAttribute("onmouseup", "end_drag(event,this)")
+  div.setAttribute("ontouchend", "end_drag(event,this)")
+  td.appendChild(div)
+  var sp = document.createElement("span")
+  sp.setAttribute("onclick", "document.execCommand('selectAll',false,null)")
+  sp.setAttribute("spellcheck", "false")
+  sp.setAttribute("contenteditable", "true")
+  sp.setAttribute("onmousedown", "start_drag(event,this)")
+  sp.setAttribute("ontouchstart", "start_drag(event,this)")
+  sp.setAttribute("onmousemove", "continue_drag(event,this)")
+  sp.setAttribute("ontouchmove", "continue_drag(event,this)")
+  sp.setAttribute("onmouseup", "end_drag(event,this)")
+  sp.setAttribute("ontouchend", "end_drag(event,this)")
+  sp.innerHTML = "click me"
+  td.appendChild(sp)
 }
 
 // defer attr. required for this to work without document.onload
@@ -60,7 +79,7 @@ function toggle_nav()
     document.getElementById("toggle_btn").style.right = "2px"
     document.getElementById("toggle_btn").innerHTML = "&#x25c2;"
   }
-  sidebar_hidden = !sidebar_hidden;
+  sidebar_hidden = !sidebar_hidden
 }
 
 function set_cell_to_dominant_color(td, img_src, allow_choose)
@@ -153,35 +172,34 @@ function change_dims(isrows)
   var rostertbl = document.getElementById("roster_tbl")
   var rowbox = document.getElementById("num_rows")
   var colbox = document.getElementById("num_cols")
+
+  // Validate input
+  if (Number(rowbox.value) <= 0 || Number(colbox.value) <= 0 ||
+      Number(rowbox.value) > 50 || Number(colbox.value) > 50)
+    return
+
   if (isrows)
   {
     // Need to add a row if curr. length is less than in the box
     if (rostertbl.rows.length < Number(rowbox.value))
     {
-      var r = rostertbl.insertRow(-1)
-      for (var i = 0; i < Number(colbox.value); i++)
+      // Keep going until we have as many rows as the box says
+      while (rostertbl.rows.length < Number(rowbox.value))
       {
-        var c = r.insertCell(-1)
-        var div = document.createElement("div")
-        div.setAttribute("ondblclick", "add_img(this)")
-        div.setAttribute("onmousedown", "start_drag(event,this)")
-        div.setAttribute("onmousemove", "continue_drag(event,this)")
-        div.setAttribute("onmouseup", "end_drag(event,this)")
-        c.appendChild(div)
-        var sp = document.createElement("span")
-        sp.setAttribute("onclick", "document.execCommand('selectAll',false,null)")
-        sp.setAttribute("spellcheck", "false")
-        sp.setAttribute("contenteditable", "true")
-        sp.setAttribute("onmousedown", "start_drag(event,this)")
-        sp.setAttribute("onmousemove", "continue_drag(event,this)")
-        sp.setAttribute("onmouseup", "end_drag(event,this)")
-        sp.innerHTML = "click me"
-        c.appendChild(sp)
+        var r = rostertbl.insertRow(-1)
+        for (var i = 0; i < Number(colbox.value); i++)
+        {
+          var c = r.insertCell(-1)
+          init_cell(c)
+        }
       }
     }
-    else
+    else if (rostertbl.rows.length > Number(rowbox.value))
     {
-      rostertbl.deleteRow(-1)
+      while (rostertbl.rows.length > Number(rowbox.value))
+      {
+        rostertbl.deleteRow(-1)
+      }
     }
   }
   else
@@ -189,31 +207,23 @@ function change_dims(isrows)
     // Need to add a col if curr. length is less than in the box
     if (rostertbl.rows[0].cells.length < Number(colbox.value))
     {
-      for (var i = 0; i < rostertbl.rows.length; i++)
+      while (rostertbl.rows[0].cells.length < Number(colbox.value))
       {
-        var c = rostertbl.rows[i].insertCell(-1)
-        var div = document.createElement("div")
-        div.setAttribute("ondblclick", "add_img(this)")
-        div.setAttribute("onmousedown", "start_drag(event,this)")
-        div.setAttribute("onmousemove", "continue_drag(event,this)")
-        div.setAttribute("onmouseup", "end_drag(event,this)")
-        c.appendChild(div)
-        var sp = document.createElement("span")
-        sp.setAttribute("onclick", "document.execCommand('selectAll',false,null)")
-        sp.setAttribute("spellcheck", "false")
-        sp.setAttribute("contenteditable", "true")
-        sp.setAttribute("onmousedown", "start_drag(event,this)")
-        sp.setAttribute("onmousemove", "continue_drag(event,this)")
-        sp.setAttribute("onmouseup", "end_drag(event,this)")
-        sp.innerHTML = "click me"
-        c.appendChild(sp)
+        for (var i = 0; i < rostertbl.rows.length; i++)
+        {
+          var c = rostertbl.rows[i].insertCell(-1)
+          init_cell(c)
+        }
       }
     }
-    else
+    else if (rostertbl.rows[0].cells.length > Number(colbox.value))
     {
-      for (var i = 0; i < rostertbl.rows.length; i++)
+      while (rostertbl.rows[0].cells.length > Number(colbox.value))
       {
-        rostertbl.rows[i].deleteCell(-1)
+        for (var i = 0; i < rostertbl.rows.length; i++)
+        {
+          rostertbl.rows[i].deleteCell(-1)
+        }
       }
     }
   }
@@ -560,10 +570,23 @@ var initX = 0, initY = 0, init_zoom = 100, init_spacing = 0, drag = false, zoom 
 
 function start_drag(evt, el)
 {
+  var evtX, evtY
+  if (evt.type == "touchstart")
+  {
+    evtX = evt.touches[0].clientX
+    evtY = evt.touches[0].clientY
+  }
+  else
+  {
+    evtX = evt.x
+    evtY = evt.y
+  }
+
   if (el.tagName === "DIV")
   {
-    // Right click will initiate zoom, otherwise just drag image
-    zoom = evt.which === 3
+    // Right click will initiate zoom, otherwise just drag image...
+    // unless zoom mode is on
+    zoom = evt.which === 3 || zoom_mode
 
     // Need to get the current offset so that the drag doesn't recenter the photo
     if (el.style.backgroundPosition)
@@ -576,20 +599,23 @@ function start_drag(evt, el)
     {
       var prevX = 0, prevY = 0
     }
-    initX = zoom ? evt.x : evt.x - prevX
-    initY = zoom ? evt.y : evt.y - prevY
+    initX = zoom ? evtX : evtX - prevX
+    initY = zoom ? evtY : evtY - prevY
     init_zoom = el.style.backgroundSize ? Number(el.style.backgroundSize.substr(0, el.style.backgroundSize.indexOf('%'))) : 100
     el_dragging = el
     drag = true
   }
   else if (el.tagName === "SPAN")
   {
-    // Right click will initiate letter spacing drag
-    drag = evt.which === 3
+    // Right click or touch will initiate letter spacing drag
+    if (evt.type == "mousedown")
+      drag = evt.which === 3
+    else
+      drag = true
     if (drag)
     {
-      initX = evt.x
-      initY = evt.y
+      initX = evtX
+      initY = evtY
       init_spacing = el.style.letterSpacing ? Number(el.style.letterSpacing.substr(0, el.style.letterSpacing.indexOf("px"))) : 0
       el_dragging = el
     }
@@ -598,17 +624,31 @@ function start_drag(evt, el)
 
 function continue_drag(evt, el)
 {
+  var evtX, evtY
+  if (evt.type == "touchmove")
+  {
+    evt.preventDefault()
+    evt.stopPropagation()
+    evtX = evt.touches[0].clientX
+    evtY = evt.touches[0].clientY
+  }
+  else
+  {
+    evtX = evt.x
+    evtY = evt.y
+  }
+
   if (el.tagName === "DIV")
   {
     if (zoom && drag && el === el_dragging)
     {
-      var diffX = evt.x - initX
+      var diffX = evtX - initX
       el.style.backgroundSize = (init_zoom + diffX) + "%"
     }
     else if (drag && el === el_dragging)
     {
-      var diffX = evt.x - initX
-      var diffY = evt.y - initY
+      var diffX = evtX - initX
+      var diffY = evtY - initY
       el.style.backgroundPosition = diffX + "px " + diffY + "px"
     }
   }
@@ -616,7 +656,7 @@ function continue_drag(evt, el)
   {
     if (drag && el === el_dragging)
     {
-      var diffX = evt.x - initX
+      var diffX = evtX - initX
       el.style.letterSpacing = (init_spacing + Math.floor(diffX / 5)*0.5) + "px"
     }
   }
@@ -624,9 +664,15 @@ function continue_drag(evt, el)
 
 function end_drag(evt, el)
 {
-  continue_drag(evt, el)
+  if (evt !== undefined)
+    continue_drag(evt, el)
   drag = false
   zoom = false
+}
+
+function toggle_zoom(chkbox)
+{
+  zoom_mode = chkbox.checked
 }
 
 function stop_context(evt)

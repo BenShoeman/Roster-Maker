@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#e10d05" />
+    <meta name="description" content="Create your ideal roster for Super Smash Bros. in the browser!" />
     <title>Smash Bros. Roster Maker</title>
     <link rel="stylesheet" href="main.css" />
     <link rel="icon" sizes="16x16" type="image/png" href="img/icon.png" />
@@ -24,9 +25,9 @@
     </div>
     <div id="settings_div">
       <label>Rows</label>
-      <input type="number" id="num_rows" value="2" min="1" max="25" oninput="change_dims(true)" onkeypress="event.preventDefault()" autocomplete="off" />&nbsp;&nbsp;
+      <input type="number" id="num_rows" value="2" min="1" max="25" oninput="change_dims(true)" autocomplete="off" />&nbsp;&nbsp;
       <label>Cols</label>
-      <input type="number" id="num_cols" value="6" min="1" max="25" oninput="change_dims(false)" onkeypress="event.preventDefault()" autocomplete="off" /><br/><br/>
+      <input type="number" id="num_cols" value="6" min="1" max="25" oninput="change_dims(false)" autocomplete="off" /><br/><br/>
 
       <label style="display:block;margin:0 0 12px 0">Style</label>
       <label class="container" onclick="change_theme('64')">64
@@ -118,11 +119,18 @@
         <input type="text" onchange="change_theme('custom')" /><br/>
         <label>Name Size</label>
         <input type="text" onchange="change_theme('custom')" /><br/>
-        <label>Image Radius</label>
+        <label style="letter-spacing:-1px">Image Radius</label>
         <input type="text" onchange="change_theme('custom')" /><br/><br/>
       </section>
 
-      <p style="text-decoration:underline;text-decoration-style:dotted;cursor:help" title='- You can zoom the pictures by right clicking and dragging left/right.&#10;- You can condense/expand text by right clicking and dragging left/right.' onclick="alert(this.getAttribute('title'))">Usage Tips</p>
+      <section id="zoomoptions" style="display:none">
+        <label class="container" onclick="change_box_visibility(true)">Zoom Mode
+          <input type="checkbox" onchange="toggle_zoom(this)" autocomplete="off" />
+          <span class="checkmark"></span>
+        </label><br/><br/>
+      </section>
+
+      <p style="text-decoration:underline;text-decoration-style:dotted;cursor:help" title='- You can zoom the pictures on desktop by right clicking and dragging left/right.&#10;- You can zoom the pictures on mobile by enabling zoom mode and dragging left/right.&#10;- You can condense/expand text by right clicking on desktop or touching on mobile and dragging left/right.' onclick="alert(this.getAttribute('title'))">Usage Tips</p>
 
       <span id="toggle_btn" onclick="toggle_nav()">&#x25b8;</a>
     </div>
