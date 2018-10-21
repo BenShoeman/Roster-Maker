@@ -2,8 +2,11 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#e10d05" />
     <title>Smash Bros. Roster Maker</title>
     <link rel="stylesheet" href="main.css" />
+    <link rel="icon" sizes="16x16" type="image/png" href="img/icon.png" />
     <script type="text/javascript" src="js/vibrant.js"></script>
     <script type="text/javascript" src="main.js" defer></script>
   </head>
@@ -12,20 +15,10 @@
     <div id="main_div">
       <table id="roster_tbl" cellspacing="0" cellpadding="0" onclick="stop_context(event)" oncontextmenu="return false">
         <tr>
-          <td><div onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" ondblclick="add_img(this)"></div><span onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" onclick="document.execCommand('selectAll',false,null)" spellcheck="false" contenteditable>click me</span></td>
-          <td><div onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" ondblclick="add_img(this)"></div><span onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" onclick="document.execCommand('selectAll',false,null)" spellcheck="false" contenteditable>click me</span></td>
-          <td><div onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" ondblclick="add_img(this)"></div><span onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" onclick="document.execCommand('selectAll',false,null)" spellcheck="false" contenteditable>click me</span></td>
-          <td><div onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" ondblclick="add_img(this)"></div><span onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" onclick="document.execCommand('selectAll',false,null)" spellcheck="false" contenteditable>click me</span></td>
-          <td><div onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" ondblclick="add_img(this)"></div><span onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" onclick="document.execCommand('selectAll',false,null)" spellcheck="false" contenteditable>click me</span></td>
-          <td><div onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" ondblclick="add_img(this)"></div><span onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" onclick="document.execCommand('selectAll',false,null)" spellcheck="false" contenteditable>click me</span></td>
+          <td></td><td></td><td></td><td></td><td></td><td></td>
         </tr>
         <tr>
-          <td><div onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" ondblclick="add_img(this)"></div><span onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" onclick="document.execCommand('selectAll',false,null)" spellcheck="false" contenteditable>click me</span></td>
-          <td><div onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" ondblclick="add_img(this)"></div><span onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" onclick="document.execCommand('selectAll',false,null)" spellcheck="false" contenteditable>click me</span></td>
-          <td><div onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" ondblclick="add_img(this)"></div><span onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" onclick="document.execCommand('selectAll',false,null)" spellcheck="false" contenteditable>click me</span></td>
-          <td><div onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" ondblclick="add_img(this)"></div><span onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" onclick="document.execCommand('selectAll',false,null)" spellcheck="false" contenteditable>click me</span></td>
-          <td><div onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" ondblclick="add_img(this)"></div><span onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" onclick="document.execCommand('selectAll',false,null)" spellcheck="false" contenteditable>click me</span></td>
-          <td><div onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" ondblclick="add_img(this)"></div><span onmousedown="start_drag(event,this)" onmousemove="continue_drag(event,this)" onmouseup="end_drag(event,this)" onclick="document.execCommand('selectAll',false,null)" spellcheck="false" contenteditable>click me</span></td>
+          <td></td><td></td><td></td><td></td><td></td><td></td>
         </tr>
       </table>
     </div>
@@ -92,7 +85,7 @@
       </section>
 
       <section id="customoptions" style="display:none">
-        <label style="display:block;margin:0 0 12px 0;text-align:center;text-decoration:underline;text-decoration-style:dotted;cursor:help" title='You can change these attributes using CSS styling. For images, you will need to use an absolute path wrapped in url(file:///...). For character-dependent palettes in Cell BG, type either &lt;auto&gt; for automatic selection or &lt;choose&gt; to choose in place of a color.'>Custom Options</label>
+        <label style="display:block;margin:0 0 12px 0;text-align:center;text-decoration:underline;text-decoration-style:dotted;cursor:help" title='You can change these attributes using CSS styling. For images, you will need to use an absolute path wrapped in url(file:///...). For character-dependent palettes in Cell BG, type either &lt;auto&gt; for automatic selection or &lt;choose&gt; to choose in place of a color.' onclick="alert(this.getAttribute('title'))">Custom Options</label>
         <label>Main BG</label>
         <input type="text" onchange="change_theme('custom')" /><br/>
         <label>Table BG</label>
@@ -129,7 +122,9 @@
         <input type="text" onchange="change_theme('custom')" /><br/><br/>
       </section>
 
-      <p style="text-decoration:underline;text-decoration-style:dotted;cursor:help" title='You can zoom the pictures by right clicking and dragging left/right.&#13;You can condense/expand text by right clicking and dragging left/right.'>Usage Tips</p>
+      <p style="text-decoration:underline;text-decoration-style:dotted;cursor:help" title='- You can zoom the pictures by right clicking and dragging left/right.&#10;- You can condense/expand text by right clicking and dragging left/right.' onclick="alert(this.getAttribute('title'))">Usage Tips</p>
+
+      <span id="toggle_btn" onclick="toggle_nav()">&#x25b8;</a>
     </div>
     <div id="popup">
       <div id="dialog"></div>

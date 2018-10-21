@@ -1,10 +1,68 @@
 var curr_style = '64'
 var boxes_visible = true
 var choose_palette = false
+var sidebar_hidden = false
 
-// NOTE: WORKS ONLY IN FIREFOX WHEN USED AS LOCAL FILE
-// Will work when used as web server, e.g. Electron
-// requires js/vibrant.js to be loaded
+var is_screen_small = window.matchMedia ? 
+  window.matchMedia("screen and (max-width: 1000px)").matches : 
+  screen.width <= 1000
+
+function init()
+{
+  var table = document.getElementById("roster_tbl")
+  var trs = table.firstElementChild.children
+  for (var i = 0; i < trs.length; i++)
+  {
+    var tr = trs[i]
+    var tds = tr.children
+    for (var j = 0; j < tds.length; j++)
+    {
+      var td = tds[j]
+      var div = document.createElement("div")
+      div.setAttribute("ondblclick", "add_img(this)")
+      div.setAttribute("onmousedown", "start_drag(event,this)")
+      div.setAttribute("onmousemove", "continue_drag(event,this)")
+      div.setAttribute("onmouseup", "end_drag(event,this)")
+      td.appendChild(div)
+      var sp = document.createElement("span")
+      sp.setAttribute("onclick", "document.execCommand('selectAll',false,null)")
+      sp.setAttribute("spellcheck", "false")
+      sp.setAttribute("contenteditable", "true")
+      sp.setAttribute("onmousedown", "start_drag(event,this)")
+      sp.setAttribute("onmousemove", "continue_drag(event,this)")
+      sp.setAttribute("onmouseup", "end_drag(event,this)")
+      sp.innerHTML = "click me"
+      td.appendChild(sp)
+    }
+  }
+  if (is_screen_small)
+  {
+    toggle_nav()
+  }
+}
+
+// defer attr. required for this to work without document.onload
+init()
+
+function toggle_nav()
+{
+  if (sidebar_hidden)
+  {
+    document.getElementById("main_div").style.width = "calc(100% - 300px)"
+    document.getElementById("settings_div").style.right = "0"
+    document.getElementById("toggle_btn").style.right = "280px"
+    document.getElementById("toggle_btn").innerHTML = "&#x25b8;"
+  }
+  else
+  {
+    document.getElementById("main_div").style.width = "calc(100% - 20px)"
+    document.getElementById("settings_div").style.right = "-280px"
+    document.getElementById("toggle_btn").style.right = "2px"
+    document.getElementById("toggle_btn").innerHTML = "&#x25c2;"
+  }
+  sidebar_hidden = !sidebar_hidden;
+}
+
 function set_cell_to_dominant_color(td, img_src, allow_choose)
 {
   var optsform = document.getElementById("customoptions")
@@ -234,8 +292,8 @@ function change_theme(styl)
           td.getElementsByTagName("span")[0].style.borderRadius = "0"
           td.getElementsByTagName("span")[0].style.top = "0"
           td.getElementsByTagName("span")[0].style.bottom = "auto"
-          td.getElementsByTagName("span")[0].style.height = "0.5cm"
-          td.getElementsByTagName("span")[0].style.fontSize = "0.4cm"
+          td.getElementsByTagName("span")[0].style.height = "20px"
+          td.getElementsByTagName("span")[0].style.fontSize = "15px"
           td.getElementsByTagName("span")[0].style.lineHeight = "normal"
           td.getElementsByTagName("span")[0].style.letterSpacing = "0"
           td.getElementsByTagName("div")[0].style.borderRadius = "0"
@@ -252,9 +310,9 @@ function change_theme(styl)
           td.getElementsByTagName("span")[0].style.borderRadius = "0px 0px 8px 8px"
           td.getElementsByTagName("span")[0].style.top = "auto"
           td.getElementsByTagName("span")[0].style.bottom = "0"
-          td.getElementsByTagName("span")[0].style.height = "0.375cm"
-          td.getElementsByTagName("span")[0].style.fontSize = "0.3cm"
-          td.getElementsByTagName("span")[0].style.lineHeight = "0.4cm"
+          td.getElementsByTagName("span")[0].style.height = "16px"
+          td.getElementsByTagName("span")[0].style.fontSize = "12px"
+          td.getElementsByTagName("span")[0].style.lineHeight = "16px"
           td.getElementsByTagName("span")[0].style.letterSpacing = "-1px"
           td.getElementsByTagName("div")[0].style.borderRadius = "8px"
           break
@@ -270,32 +328,11 @@ function change_theme(styl)
           td.getElementsByTagName("span")[0].style.borderRadius = "0"
           td.getElementsByTagName("span")[0].style.top = "0"
           td.getElementsByTagName("span")[0].style.bottom = "auto"
-          td.getElementsByTagName("span")[0].style.height = "0.45cm"
-          td.getElementsByTagName("span")[0].style.fontSize = "0.36cm"
+          td.getElementsByTagName("span")[0].style.height = "17px"
+          td.getElementsByTagName("span")[0].style.fontSize = "13px"
           td.getElementsByTagName("span")[0].style.lineHeight = "normal"
           td.getElementsByTagName("span")[0].style.letterSpacing = "0"
           td.getElementsByTagName("div")[0].style.borderRadius = "0px 0px 5px 0px"
-          break
-        case 'sm4sh':
-          re_match = /url\("(.*)"\)/g.exec(td.getElementsByTagName("div")[0].style.background)
-          set_cell_to_dominant_color(td, re_match ? re_match[1] : "img/placeholder.png", false)
-          td.style.border = "none"
-          td.style.borderRadius = "0px"
-          td.style.borderBottom = "1.5px #c5c5c5 solid"
-          td.style.borderRight = "1.5px #c5c5c5 solid"
-          td.style.fontFamily = "'Open Sans Condensed', 'Century Gothic', sans-serif"
-          td.style.color = "white"
-          td.style.textAlign = "center"
-          td.getElementsByTagName("span")[0].style.textShadow = "none"
-          td.getElementsByTagName("span")[0].style.background = "#333"
-          td.getElementsByTagName("span")[0].style.borderRadius = "0"
-          td.getElementsByTagName("span")[0].style.top = "auto"
-          td.getElementsByTagName("span")[0].style.bottom = "0"
-          td.getElementsByTagName("span")[0].style.height = "0.55cm"
-          td.getElementsByTagName("span")[0].style.fontSize = "0.4cm"
-          td.getElementsByTagName("span")[0].style.lineHeight = "normal"
-          td.getElementsByTagName("span")[0].style.letterSpacing = "0"
-          td.getElementsByTagName("div")[0].style.borderRadius = "0"
           break
         case '3ds':
           re_match = /url\("(.*)"\)/g.exec(td.getElementsByTagName("div")[0].style.background)
@@ -310,8 +347,8 @@ function change_theme(styl)
           td.getElementsByTagName("span")[0].style.borderRadius = "0"
           td.getElementsByTagName("span")[0].style.top = "auto"
           td.getElementsByTagName("span")[0].style.bottom = "0"
-          td.getElementsByTagName("span")[0].style.height = "0.45cm"
-          td.getElementsByTagName("span")[0].style.fontSize = "0.35cm"
+          td.getElementsByTagName("span")[0].style.height = "18px"
+          td.getElementsByTagName("span")[0].style.fontSize = "14px"
           td.getElementsByTagName("span")[0].style.lineHeight = "normal"
           td.getElementsByTagName("span")[0].style.letterSpacing = "0"
           td.getElementsByTagName("div")[0].style.borderRadius = "0"
@@ -323,15 +360,32 @@ function change_theme(styl)
           td.style.fontFamily = "'Old Sans Black', 'Helvetica Black', 'Arial Black', sans-serif"
           td.style.color = "white"
           td.style.textAlign = "center"
-          // td.getElementsByTagName("span")[0].style.textShadow = "0 0 6px black"
           td.getElementsByTagName("span")[0].style.textShadow = "1px -1px 0 black, 0 -1px 0 black, -1px -1px 0 black, -1px 0 0 black, -1px 1px 0 black, 0 1px 0 black, 1px 1px 0 black, 1px 0 0 black"
-          // td.getElementsByTagName("span")[0].style.background = "#1f1f1f"
-          td.getElementsByTagName("span")[0].style.background = "linear-gradient(to bottom, transparent, transparent 20%, #1f1f1f 20%, #1f1f1f"
+          td.getElementsByTagName("span")[0].style.background = "linear-gradient(to bottom, transparent, transparent 30%, #1f1f1f 30%, #1f1f1f"
           td.getElementsByTagName("span")[0].style.borderRadius = "0"
           td.getElementsByTagName("span")[0].style.top = "auto"
           td.getElementsByTagName("span")[0].style.bottom = "0"
-          td.getElementsByTagName("span")[0].style.height = "0.45cm"
-          td.getElementsByTagName("span")[0].style.fontSize = "0.35cm"
+          td.getElementsByTagName("span")[0].style.height = "18px"
+          td.getElementsByTagName("span")[0].style.fontSize = "14px"
+          td.getElementsByTagName("span")[0].style.lineHeight = "normal"
+          td.getElementsByTagName("span")[0].style.letterSpacing = "0"
+          td.getElementsByTagName("div")[0].style.borderRadius = "0"
+          break
+        case 'sm4sh':
+          re_match = /url\("(.*)"\)/g.exec(td.getElementsByTagName("div")[0].style.background)
+          set_cell_to_dominant_color(td, re_match ? re_match[1] : "img/placeholder.png", false)
+          td.style.border = "transparent"
+          td.style.borderRadius = "0px"
+          td.style.fontFamily = "'Open Sans Condensed', 'Century Gothic', sans-serif"
+          td.style.color = "white"
+          td.style.textAlign = "center"
+          td.getElementsByTagName("span")[0].style.textShadow = "none"
+          td.getElementsByTagName("span")[0].style.background = "#333"
+          td.getElementsByTagName("span")[0].style.borderRadius = "0"
+          td.getElementsByTagName("span")[0].style.top = "auto"
+          td.getElementsByTagName("span")[0].style.bottom = "0"
+          td.getElementsByTagName("span")[0].style.height = "20px"
+          td.getElementsByTagName("span")[0].style.fontSize = "15px"
           td.getElementsByTagName("span")[0].style.lineHeight = "normal"
           td.getElementsByTagName("span")[0].style.letterSpacing = "0"
           td.getElementsByTagName("div")[0].style.borderRadius = "0"
@@ -348,8 +402,8 @@ function change_theme(styl)
           td.getElementsByTagName("span")[0].style.borderRadius = "0"
           td.getElementsByTagName("span")[0].style.top = "auto"
           td.getElementsByTagName("span")[0].style.bottom = "0"
-          td.getElementsByTagName("span")[0].style.height = "0.45cm"
-          td.getElementsByTagName("span")[0].style.fontSize = "0.35cm"
+          td.getElementsByTagName("span")[0].style.height = "18px"
+          td.getElementsByTagName("span")[0].style.fontSize = "14px"
           td.getElementsByTagName("span")[0].style.lineHeight = "normal"
           td.getElementsByTagName("span")[0].style.letterSpacing = "0"
           td.getElementsByTagName("div")[0].style.borderRadius = "0"
@@ -412,12 +466,6 @@ function change_theme(styl)
       table.style.background = "none"
       table.style.border = "none"
       break
-    case 'sm4sh':
-      maindiv.style.background = "#f7f7f7"
-      table.setAttribute("cellspacing", "4")
-      table.style.background = "none"
-      table.style.border = "none"
-      break
     case '3ds':
       maindiv.style.background = "black"
       table.setAttribute("cellspacing", "0")
@@ -430,6 +478,12 @@ function change_theme(styl)
       table.style.background = "url(img/ssbwubg.jpg)"
       table.style.backgroundSize = "100% 100%"
       table.style.border = "1px #1f1f1f solid"
+      break
+    case 'sm4sh':
+      maindiv.style.background = "#f7f7f7"
+      table.setAttribute("cellspacing", "4")
+      table.style.background = "none"
+      table.style.border = "none"
       break
     case 'ult':
       maindiv.style.background = "url(img/ssbubbg.jpg)"

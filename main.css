@@ -1,14 +1,5 @@
 @font-face
 {
-  font-family: 'Arimo';
-  src: url('font/arimoreg.woff2') format('woff2'),
-        url('font/arimoreg.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face
-{
   font-family: 'Arimo Bold';
   src: url('font/arimobold.woff2') format('woff2'),
         url('font/arimobold.woff') format('woff');
@@ -55,6 +46,7 @@
 body
 {
   font-family: 'Old Sans Black', Arial, Helvetica, sans-serif;
+  overflow: hidden;
 }
 
 #main_div
@@ -62,32 +54,51 @@ body
   position: absolute;
   left: 0;
   top: 0;
-  width: calc(100% - 8cm);
+  width: calc(100% - 300px);
   height: 100vh;
   overflow: auto;
   display: flex;
   align-items: center;
+  transition: width 0.3s;
 
   background-color: black;
 }
 
 #settings_div
 {
-  position: absolute;
+  position: fixed;
   right: 0;
   top: 0;
-  width: 8cm;
+  width: 300px;
   height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 0.5cm;
+  padding: 20px;
   box-sizing: border-box;
   text-align: center;
+  transition: right 0.3s;
 
   background-color: #202020;
   color: white;
-  box-shadow: 0 0 0.75cm rgba(0,0,0,0.5);
+  box-shadow: 0 0 30px rgba(0,0,0,0.5);
   text-shadow: 1px -1px 0 black, 0 -1px 0 black, -1px -1px 0 black, -1px 0 0 black, -1px 1px 0 black, 0 1px 0 black, 1px 1px 0 black, 1px 0 0 black, 2px 2px 0 black;
+}
+
+#toggle_btn
+{
+  position: fixed;
+  display: block;
+  top: 50vh;
+  right: 280px;
+  font-family: 'Arimo Bold', Helvetica, Arial, sans-serif;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.3s all;
+}
+
+#toggle_btn:hover
+{
+  text-shadow: 1px -1px 0 black, 0 -1px 0 black, -1px -1px 0 black, -1px 0 0 black, -1px 1px 0 black, 0 1px 0 black, 1px 1px 0 black, 1px 0 0 black, 2px 2px 0 black, 0 0 10px #ffbf00, 0 0 10px #ffbf00;
 }
 
 #roster_tbl
@@ -102,9 +113,9 @@ body
 {
   position: relative;
   border: 0.5px white solid;
-  width: 2.5cm;
-  min-width: 2.5cm;
-  height: 2cm;
+  width: 100px;
+  min-width: 100px;
+  height: 80px;
   vertical-align: top;
   background-image: none;
   color: white;
@@ -128,11 +139,11 @@ body
   position: absolute;
   display: block;
   width: 100%;
-  height: 0.6cm;
-  padding: 0 0.05cm 0 0.05cm;
+  height: 25px;
+  padding: 0 2px 0 2px;
   box-sizing: border-box;
   font-family: inherit;
-  font-size: 0.45cm;
+  font-size: 15px;
   background-color: black;
   color: inherit;
   text-shadow: 0 0 6px black;
@@ -187,6 +198,54 @@ code, #customoptions input[type=text]
 #customoptions input
 {
   width: 8em;
+}
+
+#popup
+{
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  visibility: hidden;
+}
+
+#dialog
+{
+  position: relative;
+  margin: 0 auto;
+  width: 500px;
+  height: 250px;
+  background-color: white;
+  box-shadow: 0 0 75px black;
+  text-align: center;
+}
+
+#dialog > label
+{
+  display: block;
+  padding: 20px;
+  margin: 0;
+}
+
+#dialog table
+{
+  width: 100%;
+  height: calc(100% - 60px);
+  margin: 0;
+  padding: 0 20px 20px 20px;
+  border: 0;
+  box-sizing: border-box;
+}
+
+#dialog td
+{
+  margin: 20px;
+  border: 0;
+  cursor: pointer;
+  box-sizing: border-box;
 }
 
 /* Checkbox/radio button container */
@@ -328,52 +387,4 @@ code, #customoptions input[type=text]
 #customoptions .container input
 {
   display: none;
-}
-
-#popup
-{
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100vh;
-  background-color: rgba(0,0,0,0.5);
-  display: flex;
-  align-items: center;
-  visibility: hidden;
-}
-
-#dialog
-{
-  position: relative;
-  margin: 0 auto;
-  width: 14cm;
-  height: 7cm;
-  background-color: white;
-  box-shadow: 0 0 2cm black;
-  text-align: center;
-}
-
-#dialog > label
-{
-  display: block;
-  padding: 0.5cm;
-  margin: 0;
-}
-
-#dialog table
-{
-  width: 100%;
-  height: calc(100% - 1.5cm);
-  margin: 0;
-  padding: 0 0.5cm 0.5cm 0.5cm;
-  border: 0;
-  box-sizing: border-box;
-}
-
-#dialog td
-{
-  margin: 0.5cm;
-  border: 0;
-  cursor: pointer;
-  box-sizing: border-box;
 }
