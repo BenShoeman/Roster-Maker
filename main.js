@@ -64,9 +64,6 @@ function init_cell(td)
   td.appendChild(sp)
 }
 
-// defer attr. required for this to work without document.onload
-init()
-
 function toggle_nav()
 {
   if (sidebar_hidden)
@@ -689,4 +686,6 @@ function stop_context(evt)
   }
 }
 
+// defer attr. required for this to work without document.onload
+init()
 change_theme('64')
