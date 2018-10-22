@@ -84,12 +84,25 @@ body
   text-shadow: 1px -1px 0 black, 0 -1px 0 black, -1px -1px 0 black, -1px 0 0 black, -1px 1px 0 black, 0 1px 0 black, 1px 1px 0 black, 1px 0 0 black, 2px 2px 0 black;
 }
 
+#settings_div a
+{
+  color: #fd7;
+  transition: 0.3s all;
+}
+
+#settings_div a:hover
+{
+  color: white;
+}
+
 #toggle_btn
 {
   position: fixed;
   display: block;
-  top: 50vh;
+  top: calc(50vh - 50px - 0.5em);
   right: 280px;
+  height: 100px;
+  line-height: 100px;
   font-family: 'Arimo Bold', Helvetica, Arial, sans-serif;
   font-size: 20px;
   cursor: pointer;
@@ -157,7 +170,7 @@ label
   margin-bottom: 8px;
 }
 
-input
+input[type=text], input[type=number]
 {
   background: none;
   border: 0;
@@ -166,21 +179,44 @@ input
   font-family: inherit;
   font-size: inherit;
   padding: 0.25em;
-  transition: 0.25s;
+  transition: 0.25s all;
   text-shadow: 1px -1px 0 black, 0 -1px 0 black, -1px -1px 0 black, -1px 0 0 black, -1px 1px 0 black, 0 1px 0 black, 1px 1px 0 black, 1px 0 0 black, 2px 2px 0 black;
 }
 
-input:focus
+input[type=text]:focus, input[type=number]:focus
 {
   outline: none;
   border-bottom-color: #ff3;
-  transition: 0.25s;
 }
 
 input[type=number]
 {
   width: 3em;
   text-align: center;
+}
+
+input[type=button]
+{
+  background-color: #ffbf00;
+  margin-bottom: 16px;
+  border: 0;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0.25em;
+  transition: 0.25s all;
+  text-shadow: 1px -1px 0 black, 0 -1px 0 black, -1px -1px 0 black, -1px 0 0 black, -1px 1px 0 black, 0 1px 0 black, 1px 1px 0 black, 1px 0 0 black, 2px 2px 0 black;
+  cursor: pointer;
+}
+
+input[type=button]:hover
+{
+  background-color: #fd7;
+}
+
+input[type=button]:active
+{
+  background-color: goldenrod;
 }
 
 #customoptions
@@ -216,8 +252,9 @@ code, #customoptions input[type=text]
 {
   position: relative;
   margin: 0 auto;
+  padding: 20px;
   width: 500px;
-  height: 250px;
+  height: auto;
   background-color: white;
   box-shadow: 0 0 75px black;
   text-align: center;
@@ -226,17 +263,14 @@ code, #customoptions input[type=text]
 #dialog > label
 {
   display: block;
-  padding: 20px;
   margin: 0;
 }
 
 #dialog table
 {
   width: 100%;
-  height: calc(100% - 60px);
-  margin: 0;
-  padding: 0 20px 20px 20px;
-  border: 0;
+  height: 200px;
+  margin: 20px 0 0 0;
   box-sizing: border-box;
 }
 
@@ -246,6 +280,24 @@ code, #customoptions input[type=text]
   border: 0;
   cursor: pointer;
   box-sizing: border-box;
+}
+
+#dialog img
+{
+  width: 100%;
+  height: auto;
+  margin: 20px 0 20px 0;
+}
+
+#dialog a
+{
+  color: #d90;
+  transition: 0.3s all;
+}
+
+#dialog a:hover
+{
+  color: #ffbf00;
 }
 
 /* Checkbox/radio button container */
@@ -387,4 +439,11 @@ code, #customoptions input[type=text]
 #customoptions .container input
 {
   display: none;
+}
+
+#save_wrapper
+{
+  padding: 50px;
+  position: relative;
+  margin: 0 auto;
 }

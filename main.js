@@ -9,6 +9,10 @@ var is_screen_small = window.matchMedia ?
   screen.width <= 1000
 var is_touch_device = 'ontouchstart' in window || navigator.msMaxTouchPoints > 0
 
+var placeholder_img = "img/placeholder.png"
+if (is_touch_device)
+  placeholder_img = "img/placeholder_mobile.png"
+
 function init()
 {
   var table = document.getElementById("roster_tbl")
@@ -49,6 +53,7 @@ function init_cell(td)
   div.setAttribute("ontouchmove", "continue_drag(event,this)")
   div.setAttribute("onmouseup", "end_drag(event,this)")
   div.setAttribute("ontouchend", "end_drag(event,this)")
+  div.style.background = "url(" + placeholder_img + ") 0px 0px/cover no-repeat"
   td.appendChild(div)
   var sp = document.createElement("span")
   sp.setAttribute("onclick", "document.execCommand('selectAll',false,null)")
@@ -77,7 +82,7 @@ function toggle_nav()
   {
     document.getElementById("main_div").style.width = "calc(100% - 20px)"
     document.getElementById("settings_div").style.right = "-280px"
-    document.getElementById("toggle_btn").style.right = "2px"
+    document.getElementById("toggle_btn").style.right = "5px"
     document.getElementById("toggle_btn").innerHTML = "&#x25c2;"
   }
   sidebar_hidden = !sidebar_hidden
@@ -317,7 +322,7 @@ function change_theme(styl)
           td.style.color = "#d6d6d6"
           td.style.textAlign = "center"
           td.getElementsByTagName("span")[0].style.textShadow = "none"
-          td.getElementsByTagName("span")[0].style.background = "#280505"
+          td.getElementsByTagName("span")[0].style.background = "#200"
           td.getElementsByTagName("span")[0].style.borderRadius = "0px 0px 8px 8px"
           td.getElementsByTagName("span")[0].style.top = "auto"
           td.getElementsByTagName("span")[0].style.bottom = "0"
@@ -347,7 +352,7 @@ function change_theme(styl)
           break
         case '3ds':
           re_match = /url\("(.*)"\)/g.exec(td.getElementsByTagName("div")[0].style.background)
-          set_cell_to_dominant_color(td, re_match ? re_match[1] : "img/placeholder.png", false)
+          set_cell_to_dominant_color(td, re_match ? re_match[1] : placeholder_img, false)
           td.style.border = "0.5px black solid"
           td.style.borderRadius = "0px"
           td.style.fontFamily = "'Old Sans Black', 'Helvetica Black', 'Arial Black', sans-serif"
@@ -384,7 +389,7 @@ function change_theme(styl)
           break
         case 'sm4sh':
           re_match = /url\("(.*)"\)/g.exec(td.getElementsByTagName("div")[0].style.background)
-          set_cell_to_dominant_color(td, re_match ? re_match[1] : "img/placeholder.png", false)
+          set_cell_to_dominant_color(td, re_match ? re_match[1] : placeholder_img, false)
           td.style.border = "transparent"
           td.style.borderRadius = "0px"
           td.style.fontFamily = "'Open Sans Condensed', 'Century Gothic', sans-serif"
@@ -423,7 +428,7 @@ function change_theme(styl)
           if (optsform.getElementsByTagName("input")[4].value.includes("<auto>") || optsform.getElementsByTagName("input")[4].value.includes("<choose>"))
           {
             re_match = /url\("(.*)"\)/g.exec(td.getElementsByTagName("div")[0].style.background)
-            set_cell_to_dominant_color(td, re_match ? re_match[1] : "img/placeholder.png", false)
+            set_cell_to_dominant_color(td, re_match ? re_match[1] : placeholder_img, false)
           }
           else
           {
@@ -468,13 +473,13 @@ function change_theme(styl)
     case 'melee':
       maindiv.style.background = "radial-gradient(circle, #000a18, #0f182a)"
       table.setAttribute("cellspacing", "3")
-      table.style.background = "none"
+      table.style.background = "transparent"
       table.style.border = "none"
       break
     case 'brawl':
       maindiv.style.background = "#f9f5f2"
       table.setAttribute("cellspacing", "2")
-      table.style.background = "none"
+      table.style.background = "transparent"
       table.style.border = "none"
       break
     case '3ds':
@@ -684,6 +689,48 @@ function stop_context(evt)
     evt.stopPropagation()
     return false
   }
+}
+
+function save_roster()
+{
+  document.getElementById("save_wrapper").style.background = document.getElementById("main_div").style.background
+  html2canvas(document.querySelector("#save_wrapper")).then(canvas => {
+    if (is_touch_device)
+    {
+      popup_save_dialog(canvas.toDataURL("image/png"))
+    }
+    else
+    {
+      var link = document.getElementById("downloadlink")
+      link.setAttribute("download", "myroster.png")
+      link.setAttribute("href", canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"))
+      link.click()
+    }
+    document.getElementById("save_wrapper").style.background = "none"
+  })
+}
+
+function popup_save_dialog(dataURL)
+{
+  var dialog = document.getElementById("dialog")
+  var label = document.createElement("label")
+  label.innerHTML = "Save the image below!"
+  var img = document.createElement("img")
+  img.setAttribute("src", dataURL)
+  var link = document.createElement("a")
+  link.innerHTML = "Close"
+  link.onclick = function() {
+    // Delete parts of the dialog and hide the popup
+    document.getElementById("popup").style.visibility = "hidden"
+    while (dialog.firstChild)
+    {
+      dialog.removeChild(dialog.firstChild)
+    }
+  }
+  dialog.appendChild(label)
+  dialog.appendChild(img)
+  dialog.appendChild(link)
+  document.getElementById("popup").style.visibility = "visible"
 }
 
 // defer attr. required for this to work without document.onload
