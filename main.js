@@ -7,6 +7,7 @@ var zoom_mode = false
 var is_screen_small = window.matchMedia ? 
   window.matchMedia("screen and (max-width: 1000px)").matches : 
   screen.width <= 1000
+var is_touch_device = 'ontouchstart' in window || navigator.msMaxTouchPoints > 0
 
 function init()
 {
@@ -29,7 +30,7 @@ function init()
   }
 
   // Detect if device is touch-enabled and if so, show zoom mode options
-  if ('ontouchstart' in window || navigator.msMaxTouchPoints > 0)
+  if (is_touch_device)
   {
     document.getElementById("zoomoptions").style.display = "block"
   }
@@ -38,7 +39,10 @@ function init()
 function init_cell(td)
 {
   var div = document.createElement("div")
-  div.setAttribute("ondblclick", "add_img(this)")
+  if (is_touch_device)
+    div.setAttribute("onclick", "add_img(this)")
+  else
+    div.setAttribute("ondblclick", "add_img(this)")
   div.setAttribute("onmousedown", "start_drag(event,this)")
   div.setAttribute("ontouchstart", "start_drag(event,this)")
   div.setAttribute("onmousemove", "continue_drag(event,this)")
