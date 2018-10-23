@@ -53,7 +53,7 @@ function init_cell(td)
   div.setAttribute("ontouchmove", "continue_drag(event,this)")
   div.setAttribute("onmouseup", "end_drag(event,this)")
   div.setAttribute("ontouchend", "end_drag(event,this)")
-  div.style.background = "url(" + placeholder_img + ") 0px 0px/cover no-repeat"
+  div.style.background = "url(" + placeholder_img + ") 0px 0px/100% no-repeat"
   td.appendChild(div)
   var sp = document.createElement("span")
   sp.setAttribute("onclick", "document.execCommand('selectAll',false,null)")
